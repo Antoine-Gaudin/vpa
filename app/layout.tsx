@@ -1,20 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// Polices chargées par <link> : next/font/google plante sous Turbopack (Next 16.0.7)
+const GOOGLE_FONTS =
+  "https://fonts.googleapis.com/css2?family=Chivo:wght@600;700;800&family=JetBrains+Mono:wght@500;700&family=Work+Sans:wght@400;500;600;700&display=swap";
+const MATERIAL_SYMBOLS =
+  "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0&display=block";
 
 export const metadata: Metadata = {
-  title: "Vexin piece auto",
-  description: "Vente de pièce détacher",
+  title: "Vexin Pièces Autos – Pièces auto neuves à Gisors (27)",
+  description:
+    "Vexin Pièces Autos, franchisé ID Rechange à Gisors : pièces automobiles neuves toutes marques, outillage, matériel d'atelier et pare-brise, pour particuliers et professionnels.",
 };
 
 export default function RootLayout({
@@ -23,12 +19,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+    <html lang="fr">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="stylesheet" href={GOOGLE_FONTS} />
+        <link rel="stylesheet" href={MATERIAL_SYMBOLS} />
+      </head>
+      <body className="font-sans antialiased">{children}</body>
     </html>
   );
 }

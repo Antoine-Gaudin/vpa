@@ -26,25 +26,29 @@ const brandLogos = [
 
 export default function BrandsScroller() {
   return (
-    <div className="mt-10 overflow-hidden w-full">
-      <div className="flex gap-6 md:gap-10 animate-marques">
-        {brandLogos.concat(brandLogos).map((src, index) => (
-          <div key={index} className="flex-shrink-0">
-            <Image
-              src={src}
-              alt={`Marque ${index + 1}`}
-              width={140}
-              height={70}
-              className="h-10 md:h-16 w-auto object-contain"
-            />
+    <section className="bg-subtle py-5 border-y border-surface-container">
+      <div className="max-w-[1320px] mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center gap-4 md:gap-8">
+        <span className="label-badge uppercase text-muted whitespace-nowrap">Nos marques</span>
+        <div className="overflow-hidden w-full [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+          <div className="flex gap-8 md:gap-12 w-max animate-marques">
+            {brandLogos.concat(brandLogos).map((src, index) => (
+              <div key={index} className="flex-shrink-0">
+                <Image
+                  src={src}
+                  alt={index < brandLogos.length ? `Marque ${index + 1}` : ""}
+                  width={140}
+                  height={70}
+                  className="h-10 md:h-12 w-auto object-contain mix-blend-multiply"
+                />
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
 
-      {/* Animation locale */}
       <style jsx>{`
         .animate-marques {
-          animation: marques 25s linear infinite;
+          animation: marques 35s linear infinite;
         }
 
         @keyframes marques {
@@ -55,7 +59,13 @@ export default function BrandsScroller() {
             transform: translateX(-50%);
           }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+          .animate-marques {
+            animation: none;
+          }
+        }
       `}</style>
-    </div>
+    </section>
   );
 }
